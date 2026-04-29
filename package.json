@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "npx http-server -p 8080 -o",
     "check": "echo 'Checking for placeholders...' && grep -r '\\[' *.html || echo '✅ No placeholders found!'",
-    "deploy": "echo 'Push to GitHub, then deploy via Cloudflare Pages dashboard'"
+    "deploy": "wrangler deploy",
+    "preview": "wrangler dev"
   },
   "keywords": [
     "real-estate",
@@ -15,5 +16,9 @@
   ],
   "author": "Pro Casa LLC",
   "license": "UNLICENSED",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "wrangler": "^4.86.0"
+  }
 }
