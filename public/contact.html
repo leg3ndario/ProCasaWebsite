@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Request a cash offer for your property. No pressure, no obligation." />
+<title>Contact — Pro Casa</title>
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="/" class="logo"><span class="logo-mark"></span> Pro Casa</a>
+  <ul class="nav-links">
+    <li><a href="/situations.html">Situations</a></li>
+    <li><a href="/how-it-works.html">How It Works</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/contact.html" class="nav-cta">Get an Offer</a></li>
+  </ul>
+</nav>
+
+<section class="form-section">
+  <div class="form-head">
+    <span class="eyebrow">Request your offer</span>
+    <h2 class="display">Tell us about the property.</h2>
+    <p>No pressure, no obligation. We'll review the details and follow up with a written cash offer — usually within 24 to 48 hours.</p>
+  </div>
+  
+  <form class="lead-form" method="POST" data-netlify="true" name="contact">
+    <input type="hidden" name="form-name" value="contact" />
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" required />
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" required />
+      </div>
+    </div>
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" name="phone" required />
+      </div>
+    </div>
+    
+    <div class="form-row">
+      <div class="form-group full">
+        <label for="address">Property Address</label>
+        <input type="text" id="address" name="address" placeholder="Street, City, State, Zip" required />
+      </div>
+    </div>
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label for="reason">Situation</label>
+        <select id="reason" name="reason">
+          <option value="">Select one...</option>
+          <option>Foreclosure / behind on payments</option>
+          <option>Probate / inherited property</option>
+          <option>Tax liens or back taxes</option>
+          <option>Divorce</option>
+          <option>Vacant property</option>
+          <option>Tired landlord</option>
+          <option>Code violations / repairs needed</option>
+          <option>Relocation</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="timeline">Timeline to Sell</label>
+        <select id="timeline" name="timeline">
+          <option value="">Select one...</option>
+          <option>ASAP (within 30 days)</option>
+          <option>1–3 months</option>
+          <option>3–6 months</option>
+          <option>Just exploring</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="form-row">
+      <div class="form-group full">
+        <label for="message">Anything else we should know?</label>
+        <textarea id="message" name="message" placeholder="Repairs needed, occupancy status, liens, deadlines, etc."></textarea>
+      </div>
+    </div>
+
+    <div class="consent-block">
+      <div class="consent-row">
+        <input type="checkbox" id="smsTransactional" name="smsTransactional" />
+        <label for="smsTransactional">
+          I consent to receive non-marketing text messages from Pro Casa about my property inquiry, appointment reminders, requested information, and transaction-related updates. Message frequency may vary. Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out.
+        </label>
+      </div>
+      <div class="consent-row">
+        <input type="checkbox" id="smsMarketing" name="smsMarketing" />
+        <label for="smsMarketing">
+          I consent to receive marketing text messages, including property updates, offers, service updates, and follow-up messages, from Pro Casa at the phone number provided. Message frequency may vary. Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out.
+        </label>
+      </div>
+    </div>
+
+    <p class="form-disclaimer">
+      By submitting this form, you agree to be contacted by Pro Casa regarding your inquiry. Consent to receive marketing text messages is not required as a condition of doing business with us. Message and data rates may apply. Message frequency varies. Reply STOP to opt out and HELP for help. View our <a href="/privacy-policy.html">Privacy Policy</a> and <a href="/terms.html">Terms &amp; Conditions</a>.
+    </p>
+
+    <button type="submit" class="submit-btn">Request My Cash Offer →</button>
+  </form>
+
+  <div class="other-contact">
+    <h3>Other Ways to Reach Us</h3>
+    <p>Prefer to talk to a person? We're available by phone and email.</p>
+    <p><strong>Phone:</strong> [Phone]<br/>
+    <strong>Email:</strong> [Email]<br/>
+    <strong>Hours:</strong> Monday–Friday, 9am–6pm [Timezone]</p>
+    <p style="margin-top: 1rem; font-size: 0.9rem;">After-hours messages are returned the next business morning.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo"><span class="logo-mark"></span> Pro Casa</div>
+      <p>Direct cash buyers helping homeowners navigate difficult property situations with privacy, speed, and respect.</p>
+      <div class="footer-contact">
+        Pro Casa LLC<br/>
+        [Business Mailing Address]<br/>
+        [City, State Zip]<br/>
+        [Phone]<br/>
+        [Email]
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/situations.html">Who We Help</a></li>
+        <li><a href="/how-it-works.html">Our Process</a></li>
+        <li><a href="/contact.html">Get an Offer</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Resources</h5>
+      <ul>
+        <li><a href="/situations.html#foreclosure">Foreclosure Help</a></li>
+        <li><a href="/situations.html#probate">Probate Guide</a></li>
+        <li><a href="/how-it-works.html#faq">FAQ</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <ul>
+        <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="/terms.html">Terms &amp; Conditions</a></li>
+        <li><a href="/sms-terms.html">SMS Terms</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Pro Casa LLC. All rights reserved.</span>
+    <span>Pro Casa is a real estate investment company, not a real estate brokerage.</span>
+  </div>
+</footer>
+
+</body>
+</html>
