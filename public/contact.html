@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
 
@@ -22,66 +23,43 @@
   </ul>
 </nav>
 
-
-  
-<script src="https://link.msgsndr.com/js/form_embed.js"></script>
 <section class="form-section">
   <div class="form-head">
     <span class="eyebrow">Request your offer</span>
     <h2 class="display">Tell us about the property.</h2>
     <p>No pressure, no obligation. We'll review the details and follow up with a written cash offer — usually within 24 to 48 hours.</p>
   </div>
-  
-  <iframe
-    src="https://api.leadconnectorhq.com/widget/form/C4a2clwNP55mIkq4bEvc"
-    style="width:100%;height:100%;border:none;border-radius:8px"
-    id="inline-C4a2clwNP55mIkq4bEvc" 
-    data-layout="{'id':'INLINE'}"
-    data-trigger-type="alwaysShow"
-    data-trigger-value=""
-    data-activation-type="alwaysActivated"
-    data-activation-value=""
-    data-deactivation-type="neverDeactivate"
-    data-deactivation-value=""
-    data-form-name="Form 1"
-    data-height="1258"
-    data-layout-iframe-id="inline-C4a2clwNP55mIkq4bEvc"
-    data-form-id="C4a2clwNP55mIkq4bEvc"
-    title="Form 1"
-        >
-</iframe>
-  <!--<form class="lead-form" method="POST" data-netlify="true" name="contact">
-    <input type="hidden" name="form-name" value="contact" />
-    
+
+  <form class="lead-form" id="contactForm" novalidate>
     <div class="form-row">
       <div class="form-group">
-        <label for="firstName">First Name</label>
-        <input type="text" id="firstName" name="firstName" required />
+        <label for="firstName">First Name <span aria-hidden="true">*</span></label>
+        <input type="text" id="firstName" name="firstName" required autocomplete="given-name" />
       </div>
       <div class="form-group">
-        <label for="lastName">Last Name</label>
-        <input type="text" id="lastName" name="lastName" required />
+        <label for="lastName">Last Name <span aria-hidden="true">*</span></label>
+        <input type="text" id="lastName" name="lastName" required autocomplete="family-name" />
       </div>
     </div>
-    
+
     <div class="form-row">
       <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required />
+        <label for="email">Email <span aria-hidden="true">*</span></label>
+        <input type="email" id="email" name="email" required autocomplete="email" />
       </div>
       <div class="form-group">
-        <label for="phone">Phone</label>
-        <input type="tel" id="phone" name="phone" required />
+        <label for="phone">Phone <span aria-hidden="true">*</span></label>
+        <input type="tel" id="phone" name="phone" required autocomplete="tel" />
       </div>
     </div>
-    
+
     <div class="form-row">
       <div class="form-group full">
-        <label for="address">Property Address</label>
+        <label for="address">Property Address <span aria-hidden="true">*</span></label>
         <input type="text" id="address" name="address" placeholder="Street, City, State, Zip" required />
       </div>
     </div>
-    
+
     <div class="form-row">
       <div class="form-group">
         <label for="reason">Situation</label>
@@ -109,7 +87,7 @@
         </select>
       </div>
     </div>
-    
+
     <div class="form-row">
       <div class="form-group full">
         <label for="message">Anything else we should know?</label>
@@ -136,15 +114,24 @@
       By submitting this form, you agree to be contacted by Pro Casa regarding your inquiry. Consent to receive marketing text messages is not required as a condition of doing business with us. Message and data rates may apply. Message frequency varies. Reply STOP to opt out and HELP for help. View our <a href="/privacy-policy.html">Privacy Policy</a> and <a href="/terms.html">Terms &amp; Conditions</a>.
     </p>
 
-    <button type="submit" class="submit-btn">Request My Cash Offer →</button>
-  </form>-->
+    <div class="cf-turnstile"
+         data-sitekey="0x4AAAAAADsBf6Mfgdt-mXL1"
+         data-callback="onTurnstileSuccess"
+         data-expired-callback="onTurnstileExpired"
+         data-error-callback="onTurnstileError"
+         style="margin-bottom:1rem"></div>
+
+    <p id="form-error" style="color:red;display:none;margin-bottom:0.75rem"></p>
+
+    <button type="submit" id="submitBtn" class="submit-btn" disabled>Request My Cash Offer →</button>
+  </form>
 
   <div class="other-contact">
     <h3>Other Ways to Reach Us</h3>
     <p>Prefer to talk to a person? We're available by phone and email.</p>
     <p><strong>Phone:</strong> 803-515-7112<br/>
     <strong>Email:</strong> admin@procasainvestments.com<br/>
-    <strong>Hours:</strong> Monday–Friday, 9am–6pm [Timezone]</p>
+    <strong>Hours:</strong> Monday–Friday, 9am–6pm EST</p>
     <p style="margin-top: 1rem; font-size: 0.9rem;">After-hours messages are returned the next business morning.</p>
   </div>
 </section>
@@ -194,6 +181,75 @@
     <span>Pro Casa is a real estate investment company, not a real estate brokerage.</span>
   </div>
 </footer>
+
+<script>
+(function () {
+  const form = document.getElementById('contactForm')
+  const btn  = document.getElementById('submitBtn')
+  const errEl = document.getElementById('form-error')
+  let token = ''
+
+  window.onTurnstileSuccess = function (t) {
+    token = t
+    btn.disabled = false
+  }
+  window.onTurnstileExpired = function () { token = ''; btn.disabled = true }
+  window.onTurnstileError   = function () { token = ''; btn.disabled = true }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault()
+    errEl.style.display = 'none'
+
+    const required = ['firstName', 'lastName', 'email', 'phone', 'address']
+    for (const id of required) {
+      if (!form[id].value.trim()) {
+        errEl.textContent = 'Please fill in all required fields.'
+        errEl.style.display = 'block'
+        form[id].focus()
+        return
+      }
+    }
+
+    btn.disabled = true
+    btn.textContent = 'Sending…'
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName:        form.firstName.value.trim(),
+          lastName:         form.lastName.value.trim(),
+          email:            form.email.value.trim(),
+          phone:            form.phone.value.trim(),
+          address:          form.address.value.trim(),
+          reason:           form.reason.value,
+          timeline:         form.timeline.value,
+          message:          form.message.value.trim(),
+          smsTransactional: form.smsTransactional.checked,
+          smsMarketing:     form.smsMarketing.checked,
+          turnstileToken:   token,
+        }),
+      })
+
+      if (!res.ok) throw new Error(res.status)
+
+      form.closest('.form-section').innerHTML = `
+        <div style="text-align:center;padding:3rem 1rem;max-width:600px;margin:0 auto">
+          <h2 style="margin-bottom:1rem">Thank You!</h2>
+          <p>We've received your information and will follow up with a written cash offer within 24–48 hours.</p>
+          <p style="margin-top:1rem">In the meantime, feel free to call us at <strong>803-515-7112</strong>.</p>
+        </div>
+      `
+    } catch {
+      errEl.textContent = 'Something went wrong. Please try again or call us at 803-515-7112.'
+      errEl.style.display = 'block'
+      btn.disabled = false
+      btn.textContent = 'Request My Cash Offer →'
+    }
+  })
+}())
+</script>
 
 </body>
 </html>
