@@ -116,14 +116,14 @@
 
     <div class="cf-turnstile"
          data-sitekey="0x4AAAAAADsBf6Mfgdt-mXL1"
+         data-appearance="invisible"
          data-callback="onTurnstileSuccess"
          data-expired-callback="onTurnstileExpired"
-         data-error-callback="onTurnstileError"
-         style="margin-bottom:1rem"></div>
+         data-error-callback="onTurnstileError"></div>
 
     <p id="form-error" style="color:red;display:none;margin-bottom:0.75rem"></p>
 
-    <button type="submit" id="submitBtn" class="submit-btn" disabled>Request My Cash Offer →</button>
+    <button type="submit" id="submitBtn" class="submit-btn">Request My Cash Offer →</button>
   </form>
 
   <div class="other-contact">
@@ -184,19 +184,29 @@
 
 <script>
 (function () {
-  const form = document.getElementById('contactForm')
-  const btn  = document.getElementById('submitBtn')
+  const form  = document.getElementById('contactForm')
+  const btn   = document.getElementById('submitBtn')
   const errEl = document.getElementById('form-error')
   let token = ''
+  let pendingSubmit = false
 
   window.onTurnstileSuccess = function (t) {
     token = t
-    btn.disabled = false
+    if (pendingSubmit) { pendingSubmit = false; doSubmit() }
   }
-  window.onTurnstileExpired = function () { token = ''; btn.disabled = true }
-  window.onTurnstileError   = function () { token = ''; btn.disabled = true }
+  window.onTurnstileExpired = function () { token = '' }
+  window.onTurnstileError   = function () {
+    token = ''
+    if (pendingSubmit) {
+      pendingSubmit = false
+      btn.disabled = false
+      btn.textContent = 'Request My Cash Offer →'
+      errEl.textContent = 'Security check failed. Please refresh and try again.'
+      errEl.style.display = 'block'
+    }
+  }
 
-  form.addEventListener('submit', async function (e) {
+  form.addEventListener('submit', function (e) {
     e.preventDefault()
     errEl.style.display = 'none'
 
@@ -210,9 +220,19 @@
       }
     }
 
+    if (!token) {
+      pendingSubmit = true
+      btn.disabled = true
+      btn.textContent = 'Verifying…'
+      return
+    }
+
+    doSubmit()
+  })
+
+  async function doSubmit() {
     btn.disabled = true
     btn.textContent = 'Sending…'
-
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -231,9 +251,7 @@
           turnstileToken:   token,
         }),
       })
-
       if (!res.ok) throw new Error(res.status)
-
       form.closest('.form-section').innerHTML = `
         <div style="text-align:center;padding:3rem 1rem;max-width:600px;margin:0 auto">
           <h2 style="margin-bottom:1rem">Thank You!</h2>
@@ -247,7 +265,7 @@
       btn.disabled = false
       btn.textContent = 'Request My Cash Offer →'
     }
-  })
+  }
 }())
 </script>
 
