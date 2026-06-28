@@ -19,17 +19,17 @@ jobs:
 
       - run: npm install --no-audit --no-fund
 
-      - name: Deploy Worker
-        run: npx wrangler deploy
+      - name: Deploy to Cloudflare Pages
+        run: npx wrangler pages deploy public --project-name=procasawebsite2
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Sync secrets
         run: |
-          echo "$TURNSTILE_SECRET_KEY" | npx wrangler secret put TURNSTILE_SECRET_KEY --name procasawebsite2
-          echo "$GHL_API_KEY"          | npx wrangler secret put GHL_API_KEY          --name procasawebsite2
-          echo "$GHL_LOCATION_ID"      | npx wrangler secret put GHL_LOCATION_ID      --name procasawebsite2
+          echo "$TURNSTILE_SECRET_KEY" | npx wrangler pages secret put TURNSTILE_SECRET_KEY --project-name=procasawebsite2
+          echo "$GHL_API_KEY"          | npx wrangler pages secret put GHL_API_KEY          --project-name=procasawebsite2
+          echo "$GHL_LOCATION_ID"      | npx wrangler pages secret put GHL_LOCATION_ID      --project-name=procasawebsite2
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

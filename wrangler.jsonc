@@ -1,13 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "procasawebsite2",
-  "main": "src/index.js",
   "compatibility_date": "2026-04-29",
-  "assets": {
-    "directory": "./public",
-    "binding": "ASSETS"
-  },
-  "observability": {
-    "enabled": true
-  }
+  "pages_build_output_dir": "./public"
 }
