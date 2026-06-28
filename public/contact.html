@@ -55,8 +55,41 @@
 
     <div class="form-row">
       <div class="form-group full">
-        <label for="address">Property Address <span aria-hidden="true">*</span></label>
-        <input type="text" id="address" name="address" placeholder="Street, City, State, Zip" required />
+        <label for="street">Property Address <span aria-hidden="true">*</span></label>
+        <input type="text" id="street" name="street" placeholder="123 Main St" required />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group full">
+        <label for="city">City <span aria-hidden="true">*</span></label>
+        <input type="text" id="city" name="city" required />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="state">State <span aria-hidden="true">*</span></label>
+        <select id="state" name="state" required>
+          <option value="">Select state...</option>
+          <option>AL</option><option>AK</option><option>AZ</option><option>AR</option>
+          <option>CA</option><option>CO</option><option>CT</option><option>DE</option>
+          <option>FL</option><option>GA</option><option>HI</option><option>ID</option>
+          <option>IL</option><option>IN</option><option>IA</option><option>KS</option>
+          <option>KY</option><option>LA</option><option>ME</option><option>MD</option>
+          <option>MA</option><option>MI</option><option>MN</option><option>MS</option>
+          <option>MO</option><option>MT</option><option>NE</option><option>NV</option>
+          <option>NH</option><option>NJ</option><option>NM</option><option>NY</option>
+          <option>NC</option><option>ND</option><option>OH</option><option>OK</option>
+          <option>OR</option><option>PA</option><option>RI</option><option>SC</option>
+          <option>SD</option><option>TN</option><option>TX</option><option>UT</option>
+          <option>VT</option><option>VA</option><option>WA</option><option>WV</option>
+          <option>WI</option><option>WY</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="zip">ZIP Code <span aria-hidden="true">*</span></label>
+        <input type="text" id="zip" name="zip" placeholder="12345" required maxlength="5" inputmode="numeric" />
       </div>
     </div>
 
@@ -210,7 +243,7 @@
     e.preventDefault()
     errEl.style.display = 'none'
 
-    const required = ['firstName', 'lastName', 'email', 'phone', 'address']
+    const required = ['firstName', 'lastName', 'email', 'phone', 'street', 'city', 'state', 'zip']
     for (const id of required) {
       if (!form[id].value.trim()) {
         errEl.textContent = 'Please fill in all required fields.'
@@ -242,7 +275,10 @@
           lastName:         form.lastName.value.trim(),
           email:            form.email.value.trim(),
           phone:            form.phone.value.trim(),
-          address:          form.address.value.trim(),
+          street:           form.street.value.trim(),
+          city:             form.city.value.trim(),
+          state:            form.state.value,
+          zip:              form.zip.value.trim(),
           reason:           form.reason.value,
           timeline:         form.timeline.value,
           message:          form.message.value.trim(),

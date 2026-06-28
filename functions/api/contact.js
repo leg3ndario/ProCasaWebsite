@@ -1,5 +1,8 @@
 const CF = {
   propertyAddress:  'coQufhgGteccTkAZ2hAW',
+  propertyCity:     'KIjlPtPaKBpwQ8WlES5H',
+  propertyState:    'T2hnbvFggtQ4336AWr65',
+  propertyZip:      'UYRCKo1NoMoUwTbHQ6xd',
   motivation:       '92SM85hcwy2ZjgsKzzD9',
   timeline:         'dmyZ8zeywVtxwY4bZwFk',
   notes:            'nlx8zlNlwFUUhS1nyWad',
@@ -17,7 +20,8 @@ function normalizePhone(val) {
 export async function onRequestPost({ request, env }) {
   try {
     const data = await request.json()
-    const { firstName, lastName, email, phone, address, reason, timeline, message,
+    const { firstName, lastName, email, phone, street, city, state, zip,
+            reason, timeline, message,
             smsTransactional, smsMarketing, turnstileToken } = data
 
     const vr = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
@@ -35,7 +39,10 @@ export async function onRequestPost({ request, env }) {
 
     const now = new Date().toISOString()
     const customFields = [
-      { id: CF.propertyAddress, field_value: address || '' },
+      { id: CF.propertyAddress, field_value: street || '' },
+      { id: CF.propertyCity,    field_value: city || '' },
+      { id: CF.propertyState,   field_value: state || '' },
+      { id: CF.propertyZip,     field_value: zip || '' },
       { id: CF.proCasaSource,   field_value: 'procasainvestments.com' },
     ]
     if (reason)           customFields.push({ id: CF.motivation,       field_value: reason })
